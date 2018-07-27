@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet{
             user = new UserService().login(username,password);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("网络异常，请稍后再试");
         }
         //3,判断user是否为空
         if(user == null){
