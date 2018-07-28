@@ -55,7 +55,7 @@ public class LifeServlet implements Servlet {
      * servlet 是一个单实例多线程
      * 默认第一次访问的时候，服务器创建servlet，并调用init实现初始化操作，并调用一次service方法
      * 每当请求来的时候，服务器创建一个线程，调用service方法执行自己的业务逻辑
-     * 当月servlet被移除的时候服务器正常关闭的时候，服务器调用servlet的destroy方法实现销毁操作
+     * 每当servlet被移除的时候服务器正常关闭的时候，服务器调用servlet的destroy方法实现销毁操作
      */
 
 
