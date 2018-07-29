@@ -11,6 +11,7 @@
     <title>Insert title here</title>
   </head>
   <body>
-  <a href="/day09/life">c_生命周期</a>
+  <a href="/day09/life">c_生命周期</a><br>
+  <a href="/day09/scontext">e_context对象的常用方法</a><br>
   </body>
 </html>

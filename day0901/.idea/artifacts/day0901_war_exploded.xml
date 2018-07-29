@@ -10,7 +10,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="mysql-connector-java-5.1.34-bin" />
           <element id="library" level="project" name="commons-dbutils-1.4" />
-          <element id="library" level="project" name="c3p0-0.9.1.2" />
+          <element id="library" level="project" name="jar" />
         </element>
       </element>
     </root>
