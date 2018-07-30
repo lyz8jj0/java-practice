@@ -1,4 +1,4 @@
-package com.itheima.a_response.a_location;
+package com.itheima.a_respon.b_body;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
