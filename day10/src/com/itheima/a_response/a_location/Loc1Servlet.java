@@ -20,7 +20,7 @@ public class Loc1Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("我说:没零钱~~~");
 
-        System.out.println("又曰:找侯老师");
+        System.out.print("又曰:找侯老师");
 
         //方式1:理解
         //设状态码 302
