@@ -11,6 +11,7 @@
     <title>Insert title here</title>
   </head>
   <body>
-    <a href="/day10/loc1">a_重定向借钱(响应头)</a>
+    <a href="/day10/loc1">a_重定向借钱(响应头)</a><br>
+    <a href="/day10/refresh1.html">响应头-定时刷新</a><br>
   </body>
 </html>
