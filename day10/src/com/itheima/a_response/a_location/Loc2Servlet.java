@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2018/7/30.
  */
-@WebServlet(name = "Loc2Servlet",urlPatterns = {"/day10/loc2"})
+@WebServlet(name = "Loc2Servlet",urlPatterns = {"/loc2"})
 public class Loc2Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

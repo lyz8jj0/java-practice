@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2018/7/30.
  */
-@WebServlet(name = "Loc1Servlet", urlPatterns = {"/day10/loc1"})
+@WebServlet(name = "Loc1Servlet", urlPatterns = {"/loc1"})
 public class Loc1Servlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +30,6 @@ public class Loc1Servlet extends HttpServlet {
         //response.setHeader("location", "/day10/loc2");
 
         //方式2：掌握
-        response.sendRedirect("/day10/loc2");
+        response.sendRedirect("/loc2");
     }
 }
