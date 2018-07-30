@@ -30,6 +30,6 @@ public class Loc1Servlet extends HttpServlet {
         //response.setHeader("location", "/day10/loc2");
 
         //方式2：掌握
-        response.sendRedirect("/loc2");
+        response.sendRedirect("/day10/loc2");
     }
 }
