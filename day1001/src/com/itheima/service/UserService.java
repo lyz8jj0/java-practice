@@ -31,5 +31,7 @@ public class UserService {
         //调用dao
         UserDao dao = new UserDao();
         return dao.addUser(user);
+
+
     }
 }
