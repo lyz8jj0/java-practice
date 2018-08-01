@@ -42,6 +42,8 @@
 <hr>
 <center>
     <a href="/day1101/product_list.jsp">继续购物</a>&nbsp;&nbsp;&nbsp;
+    <a href="/day1101/clearCart">清空购物车</a>&nbsp;&nbsp;&nbsp;
+
 </center>
 </body>
 </html>
