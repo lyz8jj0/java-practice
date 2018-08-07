@@ -1,7 +1,5 @@
 package com.itheima.domain;
 
-import java.io.Serializable;
-
 public class User {
     private String id;
     private String username;
