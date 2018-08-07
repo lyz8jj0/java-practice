@@ -15,6 +15,8 @@
 <a href="/day12/el/demo4.jsp">el-执行运算</a><br>
 <a href="/day12/el/demo8.jsp">cookie内置对象(掌握)</a><br>
 <a href="${pageContext.request.contextPath}/el/demo8.jsp">pageContext内置对象(掌握)</a><br>
-<a href="${pageContext.request.contextPath}/jstl/if.jsp">core_if</a>
+<a href="${pageContext.request.contextPath}/jstl/if.jsp">core_if</a><br>
+<a href="${pageContext.request.contextPath}/jstl/for1.jsp">core_for1基础用法</a><br>
+<a href="${pageContext.request.contextPath}/jstl/for2.jsp">core_for1高级用法</a><br>
 </body>
 </html>
