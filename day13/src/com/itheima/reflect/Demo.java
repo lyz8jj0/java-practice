@@ -55,7 +55,7 @@ public class Demo {
     @Test
     public void f11() throws Exception {
         //1,获取class对象
-        Class clazz = Class.forName("com.itheima.domain.Person");
+        Class clazz =  Class.forName("com.itheima.domain.Person");
 
         //2,获取私有的方法
         Method m = clazz.getDeclaredMethod("sleep", String.class);
