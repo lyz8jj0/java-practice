@@ -27,7 +27,13 @@ public class AccountServlet extends HttpServlet {
         String money = request.getParameter("money");
 
         // 2，调用accountservice.account(fromuser,touser,money)
-        new AccountService().account(fromUser,toUser,money);
+        try {
+            new AccountService().account(fromUser, toUser, money);
+        } catch (Exception e) {
+            e.printStackTrace();
+            w.print("转账失败");
+            return;
+        }
 
         // 3，打印信息
         w.print("转账成功");
