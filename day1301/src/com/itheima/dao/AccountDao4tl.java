@@ -1,5 +1,6 @@
 package com.itheima.dao;
 
+import com.itheima.utils.DataSourceUtils;
 import com.itheima.utils.JdbcUtils;
 
 import java.sql.Connection;
@@ -7,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountDao {
+public class AccountDao4tl {
 
     /**
      * 转出钱
@@ -15,9 +16,12 @@ public class AccountDao {
      * @param fromUser
      * @param money
      */
-    public void accountOut(Connection conn, String fromUser, String money) throws SQLException {
+    public void accountOut(String fromUser, String money) throws SQLException {
         PreparedStatement st = null;
+        ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DataSourceUtils.getConnection();
             //编写sql
             String sql = "update account set money = money - ? where name = ?";
 
@@ -38,7 +42,7 @@ public class AccountDao {
             e.printStackTrace();
             throw e;
         } finally {
-            JdbcUtils.closeStatement(st);
+            DataSourceUtils.closeResource(st, rs);
         }
 
     }
@@ -50,11 +54,13 @@ public class AccountDao {
      * @param money
      * @throws SQLException
      */
-    public void accountIn(Connection conn, String toUser, String money) throws SQLException {
+    public void accountIn(String toUser, String money) throws SQLException {
         PreparedStatement st = null;
-
+        ResultSet rs = null;
+        Connection conn = null;
         try {
-//            conn = JdbcUtils.getConnection();
+            conn = DataSourceUtils.getConnection();
+
             //编写sql
             String sql = "update account set money = money + ? where name = ?";
 
@@ -75,7 +81,7 @@ public class AccountDao {
             e.printStackTrace();
             throw e;
         } finally {
-            JdbcUtils.closeStatement(st);
+            DataSourceUtils.closeResource(st, rs);
         }
 
     }

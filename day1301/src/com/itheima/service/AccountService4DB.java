@@ -1,11 +1,12 @@
 package com.itheima.service;
 
-import com.itheima.dao.AccountDao;
-import com.itheima.utils.JdbcUtils;
+import com.itheima.dao.AccountDao4DB;
+import com.itheima.dao.AccountDao4tl;
+import com.itheima.utils.DataSourceUtils;
 
 import java.sql.Connection;
 
-public class AccountService {
+public class AccountService4DB {
     /**
      * 转账
      *
@@ -15,33 +16,29 @@ public class AccountService {
      * @return
      */
     public String account(String fromUser, String toUser, String money) throws Exception {
-        AccountDao dao = new AccountDao();
+        AccountDao4DB dao = new AccountDao4DB();
 
         Connection conn = null;
 
         try {
             //0开启事务
-            conn = JdbcUtils.getConnection();
-            conn.setAutoCommit(false);
+            DataSourceUtils.startTransaction();
 
             //1,转出
-            dao.accountOut(conn, fromUser, money);
+            dao.accountOut(fromUser, money);
 
             int i = 1 / 0;
             //2,转入
-            dao.accountIn(conn, toUser, money);
+            dao.accountIn(toUser, money);
 
             //3,事务提交
-            conn.commit();
-            JdbcUtils.closeConn(conn);
+            DataSourceUtils.commitAndClose();
         } catch (Exception e) {
             e.printStackTrace();
-
             //事务回滚
-            conn.rollback();
-            JdbcUtils.closeConn(conn);
-            throw e;
+            DataSourceUtils.rollbackAndClose();
 
+            throw e;
         }
 
         return null;

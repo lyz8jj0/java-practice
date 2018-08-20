@@ -11,6 +11,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DataSourceUtils {
     private static ComboPooledDataSource ds = new ComboPooledDataSource();
+    private static ThreadLocal<Connection> tl = new ThreadLocal<>();
 
     /**
      * 获取数据源
@@ -22,13 +23,21 @@ public class DataSourceUtils {
     }
 
     /**
-     * 获取连接
+     * 从当前线程上获取连接
      *
      * @return 连接
      * @throws SQLException
      */
     public static Connection getConnection() throws SQLException {
-        return ds.getConnection();
+        Connection conn = tl.get();
+        if (conn == null) {
+            //第一次获取 创建一个连接和当前的线程绑定
+            conn = ds.getConnection();
+
+            //绑定
+            tl.set(conn);
+        }
+        return conn;
     }
 
 
@@ -40,9 +49,14 @@ public class DataSourceUtils {
      * @param rs   结果集
      */
     public static void closeResource(Connection conn, Statement st, ResultSet rs) {
+        closeResource(st, rs);
+        closeConn(conn);
+    }
+
+    public static void closeResource(Statement st, ResultSet rs) {
         closeResultSet(rs);
         closeStatement(st);
-        closeConn(conn);
+
     }
 
     /**
@@ -54,6 +68,8 @@ public class DataSourceUtils {
         if (conn != null) {
             try {
                 conn.close();
+                //和当前线程解绑
+                tl.remove();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -67,7 +83,7 @@ public class DataSourceUtils {
      *
      * @param st 语句执行者
      */
-    public static void closeStatement(Statement st) {
+    private static void closeStatement(Statement st) {
         if (st != null) {
             try {
                 st.close();
@@ -84,7 +100,7 @@ public class DataSourceUtils {
      *
      * @param rs 结果集
      */
-    public static void closeResultSet(ResultSet rs) {
+    private static void closeResultSet(ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
@@ -93,6 +109,57 @@ public class DataSourceUtils {
             }
             rs = null;
         }
+    }
 
+    /**
+     * 开启事务
+     *
+     * @throws SQLException
+     */
+    public static void startTransaction() throws SQLException {
+        //获取连接//开启事务
+        getConnection().setAutoCommit(false);
+    }
+
+    /**
+     * 事务提交
+     */
+    public static void commitAndClose() {
+        try {
+            //获取连接
+            Connection conn = getConnection();
+
+            //提交事务
+            conn.commit();
+
+            //释放资源
+            conn.close();
+
+            //解除绑定
+            tl.remove();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 事务回滚
+     */
+    public static void rollbackAndClose() {
+        try {
+            //获取连接
+            Connection conn = getConnection();
+
+            //提交回滚
+            conn.rollback();
+
+            //释放资源
+            conn.close();
+
+            //解除绑定
+            tl.remove();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

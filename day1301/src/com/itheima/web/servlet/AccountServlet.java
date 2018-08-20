@@ -1,6 +1,8 @@
 package com.itheima.web.servlet;
 
 import com.itheima.service.AccountService;
+import com.itheima.service.AccountService4DB;
+import com.itheima.service.AccountService4tl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +30,11 @@ public class AccountServlet extends HttpServlet {
 
         // 2，调用accountservice.account(fromuser,touser,money)
         try {
-            new AccountService().account(fromUser, toUser, money);
+            //使用的threadlocal
+            //new AccountService4tl().account(fromUser, toUser, money);
+
+            //使用DButil
+            new AccountService4DB().account(fromUser,toUser,money);
         } catch (Exception e) {
             e.printStackTrace();
             w.print("转账失败");

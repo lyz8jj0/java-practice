@@ -14,17 +14,6 @@ public class JdbcUtils {
 	static final String PASSWORD;
 	
 	static {
-		// 块编辑 alt+shift +a
-		// 变大写 ctrl+shift+x
-		// 变小写 ctrl+shift+y
-		// 向下复制一行   alt+ctrl+↓
-		// 向下添加一个空行 shift + enter
-		// 向上添加一个空行 ctrl+shift + enter
-		// 删除一行 选中行  ctrl+d
-		// 注释或者去掉注释 ctrl+/
-		// 向下移动一行 alt + ↓
-		
-		
 		// 获取ResourceBundle ctrl+2 l
 		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
 		
@@ -36,7 +25,7 @@ public class JdbcUtils {
 	}
 	
 	static {
-		// 注册驱动 ctrl+shift+f格式化代码
+		// 注册驱动
 		try {
 			Class.forName(DRIVERCLASS);
 		} catch (ClassNotFoundException e) {
