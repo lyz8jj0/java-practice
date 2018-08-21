@@ -18,7 +18,7 @@ public class AccountService4DB {
     public String account(String fromUser, String toUser, String money) throws Exception {
         AccountDao4DB dao = new AccountDao4DB();
 
-        Connection conn = null;
+//        Connection conn = null;
 
         try {
             //0开启事务
@@ -27,7 +27,7 @@ public class AccountService4DB {
             //1,转出
             dao.accountOut(fromUser, money);
 
-            int i = 1 / 0;
+//            int i = 1 / 0;
             //2,转入
             dao.accountIn(toUser, money);
 

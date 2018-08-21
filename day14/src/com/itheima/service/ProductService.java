@@ -10,10 +10,20 @@ public class ProductService {
 
     /**
      * 查询所有商品
+     *
      * @return
      */
     public List<Product> findAll() throws SQLException {
         return new ProductDao().findAll();
 
+    }
+
+    /**
+     * 添加商品
+     *
+     * @param p
+     */
+    public void addPorduct(Product p) throws SQLException {
+        new ProductDao().addProduct(p);
     }
 }

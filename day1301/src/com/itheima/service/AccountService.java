@@ -27,7 +27,7 @@ public class AccountService {
             //1,转出
             dao.accountOut(conn, fromUser, money);
 
-            int i = 1 / 0;
+//            int i = 1 / 0;
             //2,转入
             dao.accountIn(conn, toUser, money);
 

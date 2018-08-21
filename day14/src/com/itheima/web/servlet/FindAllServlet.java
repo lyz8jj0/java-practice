@@ -18,22 +18,24 @@ import java.util.List;
 @WebServlet(name = "FindAllServlet", urlPatterns = {"/findAll"})
 public class FindAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1,调用service查询所有商品,返回值list
         List<Product> plist = null;
         try {
             plist = new ProductService().findAll();
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
 
         //2,将list放入request域中
-        request.setAttribute("list",plist);
+        request.setAttribute("list", plist);
 
         //3,请求转发
-        request.getRequestDispatcher("/product_list.jsp").forward(request,response);
+        request.getRequestDispatcher("/product_list.jsp").forward(request, response);
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
