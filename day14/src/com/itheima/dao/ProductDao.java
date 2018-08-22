@@ -70,7 +70,7 @@ public class ProductDao {
      */
     public void deleteProductById(String pid) throws SQLException {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
-        String sql = "delete from product where pid = " + pid;
+        String sql = "delete from product where pid = ?";
         qr.update(sql, pid);
 
     }
