@@ -37,12 +37,41 @@ public class ProductDao {
 
     /**
      * 通过商品id获取商品
+     *
      * @param pid 商品id
      * @return 商品
      */
     public Product getProductById(String pid) throws SQLException {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from product where pid = ?";
-        return qr.query(sql,new BeanHandler<>(Product.class),pid);
+        return qr.query(sql, new BeanHandler<>(Product.class), pid);
+    }
+
+    /**
+     * 修改商品
+     *
+     * @param p
+     */
+    public void updateProductById(Product p) throws SQLException {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+
+        String sql = "update product set pname = ? ,market_price = ?,shop_price = ?,pdesc = ? where pid = ?";
+
+        qr.update(sql, p.getPname(), p.getMarket_price(), p.getShop_price(),
+                p.getPdesc(), p.getPid());
+
+
+    }
+
+    /**
+     * 删除商品
+     *
+     * @param pid
+     */
+    public void deleteProductById(String pid) throws SQLException {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "delete from product where pid = " + pid;
+        qr.update(sql, pid);
+
     }
 }

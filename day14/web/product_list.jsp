@@ -26,10 +26,23 @@
             <td width="8%">
                 <a href="${pageContext.request.contextPath}/getProductById?pid=${p.pid}">修改</a>
                 |
-                删除
+                <a href="javascript:void(0)" onclick="deleteP('${p.pid}')">删除</a>
             </td>
         </tr>
     </c:forEach>
 </table>
 </body>
+<script type="text/javascript">
+    /**
+     * 删除商品
+     * @param obj
+     */
+    function deleteP(obj) {
+        // alert(obj);
+        if (confirm("你真舍得丢弃我吗?")) {
+            //发送请求
+            location.href = "${pageContext.request.contextPath}/deleteProductById?pid=" + obj;
+        }
+    }
+</script>
 </html>
