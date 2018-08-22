@@ -26,4 +26,13 @@ public class ProductService {
     public void addPorduct(Product p) throws SQLException {
         new ProductDao().addProduct(p);
     }
+
+    /**
+     * 通过id查找商品
+     * @param pid
+     * @return
+     */
+    public Product getProductById(String pid) throws SQLException {
+        return new ProductDao().getProductById(pid);
+    }
 }
