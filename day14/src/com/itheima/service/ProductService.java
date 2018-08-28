@@ -1,6 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.dao.ProductDao;
+import com.itheima.domain.PageBean;
 import com.itheima.domain.Product;
 
 import java.sql.SQLException;
@@ -71,10 +72,28 @@ public class ProductService {
      * 多条件查询
      *
      * @param name 商品名称
-     * @param kw 关键词
+     * @param kw   关键词
      * @return
      */
     public List<Product> findProductByCondition(String name, String kw) throws SQLException {
-        return new ProductDao().findProductByCondition(name,kw);
+        return new ProductDao().findProductByCondition(name, kw);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param currPage 第几页
+     * @param pageSize 每页显示的条数
+     * @return pagebean
+     */
+    public PageBean<Product> showProductsByPage(int currPage, int pageSize) throws SQLException {
+        //查询当前页数据limit m,n     limit(当前页-1)*第页显示条数
+        ProductDao dao = new ProductDao();
+        List<Product> list = dao.findProductByPage(currPage, pageSize);
+
+        //查询总条数
+        int totalCount = dao.getCount();
+
+        return new PageBean<>(list, currPage, pageSize, totalCount);
     }
 }

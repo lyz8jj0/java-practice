@@ -5,6 +5,7 @@ import com.itheima.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -97,5 +98,29 @@ public class ProductDao {
         }
         return qr.query(sql, new BeanListHandler<>(Product.class), params.toArray());
 
+    }
+
+    /**
+     * 查询第几页的数据
+     *
+     * @param currPage
+     * @param pageSize
+     * @return
+     */
+    public List<Product> findProductByPage(int currPage, int pageSize) throws SQLException {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from product limit ?,?";
+        return qr.query(sql, new BeanListHandler<>(Product.class), (currPage - 1) * pageSize, pageSize);
+    }
+
+    /**
+     * 查询总条数
+     *
+     * @return
+     */
+    public int getCount() throws SQLException {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select count(*) from product";
+        return ((Long) qr.query(sql, new ScalarHandler())).intValue(); 
     }
 }
