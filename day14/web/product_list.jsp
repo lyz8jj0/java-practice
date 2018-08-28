@@ -7,8 +7,13 @@
 <body>
 <table border="1" align="center" width="88%">
     <tr>
-        <td colspan="6"></td>
-        <td colspan="2" align="right">
+        <td colspan="7">
+            <form action="${pageContext.request.contextPath}/findProductByCondition" method="post">
+                商品名称:<input name="name">&nbsp;&nbsp;&nbsp;&nbsp;关键词:<input name="kw">&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="查询">
+            </form>
+        </td>
+        <td colspan="1" align="right">
             <input type="button" value="删除选中" onclick="delCheck()">
         </td>
     </tr>
@@ -22,7 +27,7 @@
         <th>商品描述</th>
         <th>操作</th>
     </tr>
-    <form id="formId" action="${pageContext.request.contextPath}/delCheckedProduct" method="post">
+    <form id="formId" action="${pageContext.request.contextPath}/delCheckedServlet" method="post">
         <c:forEach items="${list }" var="p">
             <tr align="center">
                 <td width="1%"><input type="checkbox" name="pid" value="${p.pid}"></td>

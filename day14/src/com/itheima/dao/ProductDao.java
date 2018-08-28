@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
@@ -72,6 +73,29 @@ public class ProductDao {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "delete from product where pid = ?";
         qr.update(sql, pid);
+
+    }
+
+    /**
+     * 多条件查询
+     *
+     * @param name 商品名称
+     * @param kw   关键词
+     * @return list
+     */
+    public List<Product> findProductByCondition(String name, String kw) throws SQLException {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from product where 1=1 ";
+        ArrayList<String> params = new ArrayList<>();
+        if (name != null && name.trim().length() > 0) {
+            sql += ("and pname like ? ");
+            params.add("%" + name + "%");
+        }
+        if (kw != null && kw.trim().length() > 0) {
+            sql += ("and pdesc like ? ");
+            params.add("%" + kw + "%");
+        }
+        return qr.query(sql, new BeanListHandler<>(Product.class), params.toArray());
 
     }
 }
