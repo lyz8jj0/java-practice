@@ -13,5 +13,8 @@
 <body>
 <a href="${pageContext.request.contextPath}/jquery_ajax/ajax.jsp">ajax四种方式</a><br>
 <a href="${pageContext.request.contextPath}/demo2.jsp">案例2-用户是否占用</a><br>
+<a href="${pageContext.request.contextPath}/demo3.jsp">案例3-模拟百度搜索</a><br>
+<a href="${pageContext.request.contextPath}/demo4.jsp">案例4-省市联动</a><br>
+
 </body>
 </html>
