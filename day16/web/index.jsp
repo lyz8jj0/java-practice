@@ -16,8 +16,10 @@
 <%--<a href="${pageContext.request.contextPath}/attr/attr_set.jsp">添加属性</a><br>--%>
 <%--<a href="${pageContext.request.contextPath}/attr/attr_rep.jsp">替换|添加属性</a><br>--%>
 <%--<a href="${pageContext.request.contextPath}/attr/attr_rem.jsp">删除属性</a><br>--%>
-<a href="${pageContext.request.contextPath}/session/session_set.jsp">javabean绑定到session</a><br>
-<a href="${pageContext.request.contextPath}/session/session_rem.jsp">javabean从session中解绑</a><br>
-<a href="${pageContext.request.contextPath}/session/session_getJavabean.jsp">获取Javabean的名称(活化)</a><br>
+<%--<a href="${pageContext.request.contextPath}/session/session_set.jsp">javabean绑定到session</a><br>--%>
+<%--<a href="${pageContext.request.contextPath}/session/session_rem.jsp">javabean从session中解绑</a><br>--%>
+<%--<a href="${pageContext.request.contextPath}/session/session_getJavabean.jsp">获取Javabean的名称(活化)</a><br>--%>
+
+<a href="${pageContext.request.contextPath}/a/b/demo3">filterchain执行的顺序</a>
 </body>
 </html>
