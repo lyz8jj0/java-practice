@@ -58,8 +58,6 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/success.jsp");
         }
 
-
-        //若不为空跳转到success.jsp
     }
 
     @Override
