@@ -46,8 +46,18 @@ public class LoginServlet extends HttpServlet {
 
             //判断是否勾选了自动登录,若勾选了需要将用户名和密码放入cookie中,写回浏览器
             if (Constant.IS_AUTO_LOGIN.equals(request.getParameter("autoLogin"))) {
-                //创建cookie
+                //创建cookie 注意中文
                 Cookie c = new Cookie("autologin", username + "-" + password);
+                c.setMaxAge(3600);
+                c.setPath(request.getContextPath() + "/");
+
+                response.addCookie(c);
+            }
+
+            //判断是否勾选了记住用户名 若勾选了需要将用户名放入cookie写回浏览器
+            if (Constant.IS_SAVE_NAME.equals(request.getParameter("saveName"))) {
+                //创建cookie
+                Cookie c = new Cookie("savename", username);
                 c.setMaxAge(3600);
                 c.setPath(request.getContextPath() + "/");
 
