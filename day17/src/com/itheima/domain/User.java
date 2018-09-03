@@ -1,5 +1,7 @@
 package com.itheima.domain;
 
+import com.itheima.myenum.Color;
+
 import java.util.Date;
 import java.util.List;
 
@@ -40,4 +42,6 @@ public class User {
     public static void add(int... args) {
 
     }
+
+    private Color RED;
 }
