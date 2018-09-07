@@ -1,4 +1,8 @@
 package com.itheima.service;
 
-public class UserService {
+import com.itheima.domain.User;
+
+public interface UserService {
+
+    void regist(User user) throws Exception;
 }
