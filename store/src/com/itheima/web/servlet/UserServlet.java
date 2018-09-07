@@ -13,6 +13,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -141,5 +142,19 @@ public class UserServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath() + "/"); // /store
         return null;
     }
+
+
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //干掉session
+        request.getSession().invalidate();
+
+        //重定向
+        response.sendRedirect(request.getContextPath());
+
+        //处理自动登录
+
+        return null;
+    }
+
 
 }
