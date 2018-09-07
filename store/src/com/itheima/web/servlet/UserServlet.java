@@ -4,6 +4,7 @@ import com.itheima.domain.User;
 import com.itheima.myconventer.MyConventer;
 import com.itheima.service.UserService;
 import com.itheima.service.impl.UserServiceImpl;
+import com.itheima.utils.MD5Utils;
 import com.itheima.utils.UUIDUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -55,6 +56,9 @@ public class UserServlet extends BaseServlet {
 
         //1.2设置激活码
         user.setCode(UUIDUtils.getCode());
+
+        //1.3加密密码
+        user.setPassword(MD5Utils.md5(user.getPassword()));
 
         //2,调用service完成注册
         UserService s = new UserServiceImpl();
