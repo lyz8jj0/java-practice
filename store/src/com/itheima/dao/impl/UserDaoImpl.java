@@ -6,7 +6,6 @@ import com.itheima.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
-import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
     /**
@@ -48,5 +47,20 @@ public class UserDaoImpl implements UserDao {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "update user set username = ? ,password = ?, name = ? ,email = ? ,birthday = ?,state = ? ,code = ? where uid = ?";
         qr.update(sql, user.getUsername(), user.getPassword(), user.getName(), user.getEmail(), user.getBirthday(), user.getState(), null, user.getUid());
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public User getByUsernameAndPwd(String username, String password) throws Exception {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from user where username = ? and password = ? limit 1";
+        return qr.query(sql, new BeanHandler<>(User.class), username, password);
     }
 }

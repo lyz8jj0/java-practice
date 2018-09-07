@@ -1,5 +1,6 @@
 package com.itheima.web.servlet;
 
+import com.itheima.constant.Constant;
 import com.itheima.domain.User;
 import com.itheima.myconventer.MyConventer;
 import com.itheima.service.UserService;
@@ -92,7 +93,53 @@ public class UserServlet extends BaseServlet {
             request.setAttribute("msg", "激活成功");
         }
         return "/jsp/msg.jsp";
+    }
 
+
+    /**
+     * 跳转到登录页面
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String loginUI(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return "/jsp/login.jsp";
+    }
+
+    /**
+     * 登录
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1,获取用户名和密码
+        String username = request.getParameter("username");
+        String password = MD5Utils.md5(request.getParameter("password"));
+
+        //2,调用service完成操作 返回user
+        UserService s = new UserServiceImpl();
+        User user = s.login(username, password);
+
+        //3,判断用户
+        if (user == null) {
+            //用户名密码不匹配
+            request.setAttribute("msg", "用户名密码不匹配");
+            return "/jsp/login.jsp";
+        } else {
+            //继续判断用户的状态是否激活
+            if (Constant.USER_IS_ACTIVE != user.getState()) {
+                request.setAttribute("msg", "用户未激活");
+                return "/jsp/login.jsp";
+            }
+        }
+
+        //4,将user放入session中重定向
+        request.getSession().setAttribute("user", user);
+        response.sendRedirect(request.getContextPath() + "/"); // /store
+        return null;
     }
 
 }

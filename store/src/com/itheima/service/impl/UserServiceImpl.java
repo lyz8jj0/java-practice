@@ -49,4 +49,18 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public User login(String username, String password) throws Exception {
+        UserDao dao = new UserDaoImpl();
+        return dao.getByUsernameAndPwd(username, password);
+    }
 }
