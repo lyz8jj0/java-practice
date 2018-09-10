@@ -40,7 +40,7 @@ public class BaseServlet extends HttpServlet {
         }
     }
 
-    public String index(HttpServletRequest request, HttpServletResponse response) {
+    public String index(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return null;
     }
 
