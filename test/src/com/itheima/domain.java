@@ -1,30 +1,41 @@
 package com.itheima;
 
-import net.sf.json.JSONObject;
+
 import org.junit.Test;
-import net.sf.json.JSONArray;
 
-
-import java.io.StringWriter;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class domain {
+
     @Test
     public void f1(){
-//        JSONArray jsonArray = JSONArray.fromObject();
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONDAY), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+        cal.setTime(cal.getTime());
+        cal.add(Calendar.MONTH, -1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(formatter.format(cal.getTime()));
     }
-    public static void main(String[] args)
-    {
-        JSONObject obj = new JSONObject();
 
-        obj.put("name","foo");
-        obj.put("num",new Integer(100));
-        obj.put("balance",new Double(1000.21));
-        obj.put("is_vip",new Boolean(true));
 
-        StringWriter out = new StringWriter();
-        obj.writeJSONString(out);
-        String jsonText = out.toString();
-        System.out.print(jsonText);
+    @Test
+    public void f2(){
+        Calendar instance =  Calendar.getInstance();
+        System.out.println(instance.get(Calendar.YEAR));//1
+        System.out.println(instance.get(Calendar.MONTH));//2
     }
+
+    @Test
+    public void f3(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONDAY), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+        cal.setTime(cal.getTime());
+        cal.add(Calendar.MONTH, +1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println( formatter.format(cal.getTime()));
+    }
+
 }

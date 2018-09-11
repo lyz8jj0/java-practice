@@ -9,7 +9,7 @@ import java.util.Date;
 public class Product implements Serializable {
     private String pid;
     private String pname;
-    private Double mark_price;
+    private Double market_price;
 
     private Double shop_price;
     private String pimage;
@@ -36,14 +36,6 @@ public class Product implements Serializable {
 
     public void setPname(String pname) {
         this.pname = pname;
-    }
-
-    public Double getMark_price() {
-        return mark_price;
-    }
-
-    public void setMark_price(Double mark_price) {
-        this.mark_price = mark_price;
     }
 
     public Double getShop_price() {
@@ -102,7 +94,13 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    public Double getMarket_price() {
+        return market_price;
+    }
 
+    public void setMarket_price(Double market_price) {
+        this.market_price = market_price;
+    }
 
 
 }

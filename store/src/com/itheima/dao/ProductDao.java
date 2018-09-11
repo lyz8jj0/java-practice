@@ -8,4 +8,6 @@ public interface ProductDao {
     List<Product> findNew() throws Exception;
 
     List<Product> findHot() throws Exception;
+
+    Product getByPid(String pid) throws Exception;
 }

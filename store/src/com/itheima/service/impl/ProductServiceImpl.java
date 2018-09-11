@@ -31,4 +31,16 @@ public class ProductServiceImpl implements ProductService {
         ProductDao pdao = new ProductDaoImpl();
         return pdao.findHot();
     }
+
+    /**
+     * 查询单个商品
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Product getByPid(String pid) throws Exception {
+        ProductDao pdao = new ProductDaoImpl();
+        return pdao.getByPid(pid);
+    }
 }
