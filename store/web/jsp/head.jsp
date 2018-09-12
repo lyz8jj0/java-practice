@@ -75,7 +75,7 @@
 
             //遍历数组
             $(data).each(function () {
-                $ul.append($("<li><a href='#'>" + this.cname + "</a></li>"))
+                $ul.append($("<li><a href='${pageContext.request.contextPath}/product?method=findByPage&cid=" + this.cid + "&currPage=1'>" + this.cname + "</a></li>"))
 
             });
         }, "json");
