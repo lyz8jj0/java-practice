@@ -1,3 +1,4 @@
+<%@ page import="com.itheima.utils.CookUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -62,19 +63,23 @@
                     aria-hidden="true">&laquo;</span></a></li>
         </c:if>
         <c:if test="${pb.currPage != 1}">
-            <li><a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${pb.currPage-1}&cid=${param.cid}"
+            <li>
+                <a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${pb.currPage-1}&cid=${param.cid}"
                    aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 
         </c:if>
 
         <!-- 展示所有页码 -->
-        <c:forEach begin="1" end="${pb.totalPage}" var="n">
+        <c:forEach begin="${pb.currPage-5>0?pb.currPage-5:1}"
+                   end="${pb.currPage+4>pb.totalPage?pb.totalPage:pb.currPage+4}" var="n">
             <!-- 判断是否是当前页--->
             <c:if test="${pb.currPage == n}">
                 <li class="active"><a href="javascript:void(0)">${n}</a></li>
             </c:if>
             <c:if test="${pb.currPage != n}">
-                <li><a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${n}&cid=${param.cid}">${n}</a></li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${n}&cid=${param.cid}">${n}</a>
+                </li>
             </c:if>
         </c:forEach>
         <!-- 判断是否是最后一页 -->
@@ -87,7 +92,8 @@
         </c:if>
         <c:if test="${pb.currPage != pb.totalPage}">
             <li>
-                <a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${pb.currPage+1}&cid=${param.cid}" aria-label="Next">
+                <a href="${pageContext.request.contextPath}/product?method=findByPage&currPage=${pb.currPage+1}&cid=${param.cid}"
+                   aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -107,13 +113,33 @@
     <div style="clear: both;"></div>
 
     <div style="overflow: hidden;">
-
         <ul style="list-style: none;">
+            <%
+                Cookie c = CookUtils.getCookieByName("pids", request.getCookies());
+
+                //判断pids是否为空
+                if (c == null) {
+            %>
+            <h2>暂无浏览记录</h2>
+            <%
+            } else { //pids = 3-2-1
+                String[] arr = c.getValue().split("-");
+                for (String pid : arr) {
+            %>
             <li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
-                <img src="${pageContext.request.contextPath}/products/1/cs10001.jpg" width="130px" height="130px"/></li>
+                <img src="${pageContext.request.contextPath}/products/1/cs1000<%=pid%>.jpg" width="130px"
+                     height="130px"/>
+            </li>
+            <%
+                    }
+                }
+            %>
         </ul>
 
     </div>
+
+    <%--<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">--%>
+    <%--<img src="${pageContext.request.contextPath}/products/1/cs10001.jpg" width="130px" height="130px"/></li>--%>
 </div>
 <div style="margin-top:50px;">
     <img src="${pageContext.request.contextPath}/image/footer.jpg" width="100%" height="78" alt="我们的优势" title="我们的优势"/>

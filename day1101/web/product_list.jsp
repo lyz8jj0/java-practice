@@ -236,7 +236,8 @@
                 String[] arr = c.getValue().split("-");
                 for (String id : arr) {
             %>
-            <li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="products/1/cs1000<%=id%>.jpg" width="130px" height="130px"/></li>
+            <li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
+                <img src="products/1/cs1000<%=id%>.jpg" width="130px" height="130px"/></li>
 
             <%
                     }

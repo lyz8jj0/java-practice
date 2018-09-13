@@ -18,10 +18,12 @@ import java.util.List;
  */
 @WebServlet(name = "GetProductByIdServlet", urlPatterns = {"/getProductById"})
 public class GetProductByIdServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //0，设置编码
         //0.1获取当前访问的商品的id
