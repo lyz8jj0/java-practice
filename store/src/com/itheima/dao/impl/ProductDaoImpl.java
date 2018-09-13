@@ -40,7 +40,7 @@ public class ProductDaoImpl implements ProductDao {
     /**
      * 通过商品id获取商品
      *
-     * @return
+     * @returnj
      * @throws Exception
      */
     @Override

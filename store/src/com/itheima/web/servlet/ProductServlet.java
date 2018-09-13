@@ -49,7 +49,7 @@ public class ProductServlet extends BaseServlet {
 
         //2,调用service 返回值pagebean
         ProductService ps = new ProductServiceImpl();
-        PageBean<Product> bean = ps.findByPage(currPage, pageSize, cid);
+         PageBean<Product> bean = ps.findByPage(currPage, pageSize, cid);
 
         //3,将结果放入request中请求转发
         request.setAttribute("pb", bean);
