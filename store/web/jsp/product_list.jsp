@@ -47,7 +47,7 @@
                 <img src="${pageContext.request.contextPath}/${p.pimage}" width="170" height="170"
                      style="display: inline-block;">
             </a>
-            <p><a href="${pageContext.request.contextPath}/product?method=getById&pid=${p.pid}" style='color:green'>${fn:substring(p.pname,0,10)}...</a></p>
+            <p><a href="product_info.html" style='color:green'>${fn:substring(p.pname,0,10)}...</a></p>
             <p><font color="#FF0000">商城价：&yen;${p.shop_price}</font></p>
         </div>
     </c:forEach>
@@ -126,7 +126,7 @@
                 String[] arr = c.getValue().split("-");
                 for (String pid : arr) {
             %>
-            <li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
+            <li style="width: 150px;height: 216px;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
                 <img src="${pageContext.request.contextPath}/products/1/cs1000<%=pid%>.jpg" width="130px"
                      height="130px"/>
             </li>

@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends BaseServlet {
-    public Cart getCart(HttpServletRequest request) {
+    private Cart getCart(HttpServletRequest request) {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         //判断
         if (cart == null) {
@@ -57,6 +57,26 @@ public class CartServlet extends BaseServlet {
         cart.add2Cart(cartItem);
 
         //5,重定向
+        response.sendRedirect(request.getContextPath() + "/jsp/cart.jsp");
+        return null;
+    }
+
+    /**
+     * 从购物车中移除购物项
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public String remove(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1,获取商品的pid
+        String pid = request.getParameter("pid");
+
+        //2,调用购物车的remove方法
+            getCart(request).removeFromCart(pid);
+
+        //3,重定向
         response.sendRedirect(request.getContextPath() + "/jsp/cart.jsp");
         return null;
     }
