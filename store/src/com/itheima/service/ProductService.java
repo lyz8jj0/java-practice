@@ -13,4 +13,5 @@ public interface ProductService {
     Product getByPid(String pid) throws Exception;
 
     PageBean<Product> findByPage(int currPage, int pageSize, String cid) throws Exception;
+
 }

@@ -43,11 +43,11 @@
     </div>
     <c:forEach items="${pb.list}" var="p">
         <div class="col-md-2">
-            <a href="product_info.htm">
+            <a href="${pageContext.request.contextPath}/product?method=getById&pid=${p.pid}">
                 <img src="${pageContext.request.contextPath}/${p.pimage}" width="170" height="170"
                      style="display: inline-block;">
             </a>
-            <p><a href="product_info.html" style='color:green'>${fn:substring(p.pname,0,10)}...</a></p>
+            <p><a href="${pageContext.request.contextPath}/product?method=getById&pid=${p.pid}" style='color:green'>${fn:substring(p.pname,0,10)}...</a></p>
             <p><font color="#FF0000">商城价：&yen;${p.shop_price}</font></p>
         </div>
     </c:forEach>
