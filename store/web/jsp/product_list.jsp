@@ -127,7 +127,7 @@
                 for (String pid : arr) {
             %>
             <li style="width: 150px;height: 216px;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;">
-                <img src="${pageContext.request.contextPath}/products/1/cs1000<%=pid%>.jpg" width="130px"
+                <img src="${pageContext.request.contextPath}/products/img/<%=pid%>.jpg" width="130px"
                      height="130px"/>
             </li>
             <%

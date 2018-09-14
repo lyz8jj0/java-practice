@@ -70,9 +70,11 @@ public class ProductServlet extends BaseServlet {
                     list.addFirst(pid);
                 }
             }
+            pids="";
             //将list转化为字符串
             for (String s : list) {
                 pids += (s + "-");
+
             }
             pids = pids.substring(0, pids.length() - 1);
         }
@@ -82,6 +84,8 @@ public class ProductServlet extends BaseServlet {
         c.setPath(request.getContextPath() + "/");
         //设置存活时间
         c.setMaxAge(3600);
+        //写回浏览器
+        response.addCookie(c);
         return "/jsp/product_info.jsp";
     }
 
