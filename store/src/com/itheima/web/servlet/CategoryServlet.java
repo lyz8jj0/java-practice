@@ -3,6 +3,7 @@ package com.itheima.web.servlet;
 import com.itheima.domain.Category;
 import com.itheima.service.CategoryService;
 import com.itheima.service.impl.CategoryServiceImpl;
+import com.itheima.utils.BeanFactory;
 import com.itheima.utils.JsonUtil;
 
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import java.util.List;
 public class CategoryServlet extends BaseServlet {
     public String findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //1,调用categoryService查询所有的分类返回值list
-        CategoryService cs = new CategoryServiceImpl();
+        CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
         List<Category> clist = null;
         try {
             clist = cs.findAll();
