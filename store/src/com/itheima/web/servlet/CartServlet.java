@@ -18,6 +18,12 @@ import java.io.IOException;
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends BaseServlet {
+    /**
+     * 获取购物车
+     *
+     * @param request
+     * @return
+     */
     private Cart getCart(HttpServletRequest request) {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         //判断
@@ -74,9 +80,23 @@ public class CartServlet extends BaseServlet {
         String pid = request.getParameter("pid");
 
         //2,调用购物车的remove方法
-            getCart(request).removeFromCart(pid);
+        getCart(request).removeFromCart(pid);
 
         //3,重定向
+        response.sendRedirect(request.getContextPath() + "/jsp/cart.jsp");
+        return null;
+    }
+
+    /**
+     * 清空购物车
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    public String clear(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //获取购物车 清空
+        getCart(request).clearCart();
         response.sendRedirect(request.getContextPath() + "/jsp/cart.jsp");
         return null;
     }
