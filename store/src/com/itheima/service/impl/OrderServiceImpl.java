@@ -18,6 +18,9 @@ public class OrderServiceImpl implements OrderService {
             //2,向orders表中添加一个数据
             od.add(order);
 
+
+//            int i =1/0;
+
             //3,向orderitem中添加多条数据
             for (OrderItem oi : order.getItems()) {
                 od.addItem(oi);

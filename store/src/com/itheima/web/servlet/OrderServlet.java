@@ -27,7 +27,7 @@ public class OrderServlet extends BaseServlet {
      * @param response
      * @return
      */
-    public String add(HttpServletRequest request, HttpServletResponse response) {
+    public String add(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //0,判断用户是否登录
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -82,6 +82,8 @@ public class OrderServlet extends BaseServlet {
         //3,将order放入request域中,请求转发
         request.setAttribute("bean", order);
 
+        //4,清空购物车
+        request.getSession().removeAttribute("cart");
         return "/jsp/order_info.jsp";
     }
 }

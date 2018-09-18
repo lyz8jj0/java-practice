@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
         //发送邮件
         //email:收件人的地址
         //emailMsg:邮件的内容
-        String emailMsg = "欢迎您注册成我们的一员,<a href='http://localhost:8080/store/user?method=active&code=" + user.getCode() + "'>点此激活</a>";
-        MailUtils.sendMail(user.getEmail(), emailMsg);
+//        String emailMsg = "欢迎您注册成我们的一员,<a href='http://localhost:8080/store/user?method=active&code=" + user.getCode() + "'>点此激活</a>";
+//        MailUtils.sendMail(user.getEmail(), emailMsg);
     }
 
     /**
