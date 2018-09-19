@@ -1,7 +1,7 @@
 package com.itheima.dao.impl;
 
 import com.itheima.dao.OrderDao;
-import com.itheima.domain.Order.Order;
+import com.itheima.domain.Order;
 import com.itheima.domain.OrderItem;
 import com.itheima.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;

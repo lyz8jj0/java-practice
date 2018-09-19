@@ -1,7 +1,5 @@
 package com.itheima.domain;
 
-import com.itheima.domain.Order.Order;
-
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {

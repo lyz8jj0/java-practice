@@ -1,7 +1,7 @@
 package com.itheima.service.impl;
 
 import com.itheima.dao.OrderDao;
-import com.itheima.domain.Order.Order;
+import com.itheima.domain.Order;
 import com.itheima.domain.OrderItem;
 import com.itheima.service.OrderService;
 import com.itheima.utils.BeanFactory;

@@ -2,7 +2,7 @@ package com.itheima.web.servlet;
 
 import com.itheima.domain.Cart;
 import com.itheima.domain.CartItem;
-import com.itheima.domain.Order.Order;
+import com.itheima.domain.Order;
 import com.itheima.domain.OrderItem;
 import com.itheima.domain.User;
 import com.itheima.service.OrderService;

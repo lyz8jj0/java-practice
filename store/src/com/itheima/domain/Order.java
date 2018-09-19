@@ -1,7 +1,5 @@
-package com.itheima.domain.Order;
+package com.itheima.domain;
 
-import com.itheima.domain.OrderItem;
-import com.itheima.domain.User;
 
 import java.io.Serializable;
 import java.util.Date;
