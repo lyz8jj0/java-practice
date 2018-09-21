@@ -1,10 +1,6 @@
 package com.itheima.web.servlet;
 
-import com.itheima.domain.Cart;
-import com.itheima.domain.CartItem;
-import com.itheima.domain.Order;
-import com.itheima.domain.OrderItem;
-import com.itheima.domain.User;
+import com.itheima.domain.*;
 import com.itheima.service.OrderService;
 import com.itheima.utils.BeanFactory;
 import com.itheima.utils.UUIDUtils;
@@ -85,5 +81,28 @@ public class OrderServlet extends BaseServlet {
         //4,清空购物车
         request.getSession().removeAttribute("cart");
         return "/jsp/order_info.jsp";
+    }
+
+    public String findAllByPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        //1,获取当前页
+        int currPage = Integer.parseInt(request.getParameter("currPage"));
+        int pageSize = 3;
+
+        //2,获取用户
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            request.setAttribute("msg","你还没有登录,请登录!");
+            return "/jsp/msg.jsp";
+        }
+
+        //3,调用service分页查询 参数:currpage pageSize user 返回:pageBean
+        OrderService os = (OrderService)BeanFactory.getBean("OrderService");
+        PageBean<Order> bean = os.findAllByPage(currPage,pageSize,user);
+
+
+        //4,将PageBean放入request域中
+        request.setAttribute("pb",bean);
+
+        return "/jsp/order_list.jsp";
     }
 }

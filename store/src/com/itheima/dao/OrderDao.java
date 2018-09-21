@@ -3,8 +3,14 @@ package com.itheima.dao;
 import com.itheima.domain.Order;
 import com.itheima.domain.OrderItem;
 
+import java.util.List;
+
 public interface OrderDao {
     void add(Order order) throws Exception;
 
     void addItem(OrderItem oi) throws Exception;
+
+    List<Order> findAllByPage(int currPage, int pageSize, String uid) throws Exception;
+
+    int getTotalCount(String uid) throws Exception;
 }
