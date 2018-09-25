@@ -105,4 +105,18 @@ public class OrderServlet extends BaseServlet {
 
         return "/jsp/order_list.jsp";
     }
+
+    public String getById(HttpServletRequest request,HttpServletResponse response){
+        //1,获取oid
+        String oid = request.getParameter("oid");
+
+        //2,调用service 通过oid返回值:order
+        OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+        Order order = os.getById(oid);
+
+        //3,将order放入request域中
+        request.setAttribute("bean",order);
+
+        return "jsp/order_info.jsp";
+    }
 }

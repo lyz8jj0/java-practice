@@ -39,7 +39,7 @@
                     <tr class="success">
                         <th colspan="5">订单编号:${o.oid} 订单金额${o.total}
                             <c:if test="${o.state == 0}">
-                                <a href="#">付款</a>
+                                <a href="${pageContext.request.contextPath}/order?method=getById&oid=${o.oid}">付款</a>
                             </c:if>
                             <c:if test="${o.state == 1}">
                                 已付款
@@ -93,7 +93,8 @@
                         aria-hidden="true">&laquo;</span></a></li>
             </c:if>
             <c:if test="${1!=pb.currPage}">
-                <li><a href="${pageContext.request.contextPath}/order?method=findAllByPage&currPage=${pb.currPage-1}" aria-label="Previous"><span
+                <li><a href="${pageContext.request.contextPath}/order?method=findAllByPage&currPage=${pb.currPage-1}"
+                       aria-label="Previous"><span
                         aria-hidden="true">&laquo;</span></a></li>
             </c:if>
             <c:forEach begin="1" end="${pb.totalPage}" var="n">
@@ -114,7 +115,8 @@
             </c:if>
             <c:if test="${pb.currPage!=pb.totalPage}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/order?method=findAllByPage&currPage=${pb.currPage+1}" aria-label="Next">
+                    <a href="${pageContext.request.contextPath}/order?method=findAllByPage&currPage=${pb.currPage+1}"
+                       aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

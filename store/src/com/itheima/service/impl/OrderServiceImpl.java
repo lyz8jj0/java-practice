@@ -51,13 +51,26 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public PageBean<Order> findAllByPage(int currPage, int pageSize, User user) throws Exception {
-        OrderDao od = (OrderDao)BeanFactory.getBean("OrderDao");
+        OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
 
         //查询当前页数据
-        List<Order> list =  od.findAllByPage(currPage,pageSize,user.getUid());
+        List<Order> list = od.findAllByPage(currPage, pageSize, user.getUid());
 
         //查询总条数
         int totalCount = od.getTotalCount(user.getUid());
-        return new PageBean<>(list,currPage,pageSize,totalCount);
+        return new PageBean<>(list, currPage, pageSize, totalCount);
+    }
+
+    /**
+     * 查看订单详情
+     *
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Order getById(String oid) throws Exception {
+        OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
+        
     }
 }
