@@ -91,7 +91,8 @@ public class OrderServlet extends BaseServlet {
         //2,获取用户
         User user = (User) request.getSession().getAttribute("user");
         if(user == null){
-            request.setAttribute("msg","你还没有登录,请登录!");
+            request.setAttribute(
+                    "msg","你还没有登录,请登录!");
             return "/jsp/msg.jsp";
         }
 
@@ -106,7 +107,7 @@ public class OrderServlet extends BaseServlet {
         return "/jsp/order_list.jsp";
     }
 
-    public String getById(HttpServletRequest request,HttpServletResponse response){
+    public String getById(HttpServletRequest request,HttpServletResponse response) throws Exception {
         //1,获取oid
         String oid = request.getParameter("oid");
 

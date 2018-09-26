@@ -20,6 +20,9 @@ public class UUIDUtils {
 	}
 	
 	public static void main(String[] args) {
+		int result = 0;
+		System.out.println(result);
 		System.out.println(getId());
+		System.out.println(getCode());
 	}
 }

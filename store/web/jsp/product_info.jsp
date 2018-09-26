@@ -76,7 +76,6 @@
                 </form>
 
             </div>
-        </div>
     </div>
     <div class="clear"></div>
     <div style="width:950px;margin:0 auto;">

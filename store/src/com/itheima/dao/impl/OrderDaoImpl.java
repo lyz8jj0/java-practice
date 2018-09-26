@@ -7,6 +7,7 @@ import com.itheima.domain.Product;
 import com.itheima.utils.DataSourceUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -94,5 +95,37 @@ public class OrderDaoImpl implements OrderDao {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select count(*) from orders where uid = ?";
         return ((Long) qr.query(sql, new ScalarHandler(), uid)).intValue();
+    }
+
+    /**
+     * 通过oid查询订单详情
+     *
+     * @param oid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Order getById(String oid) throws Exception {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from orders where oid = ?";
+        Order order = qr.query(sql, new BeanHandler<>(Order.class), oid);
+
+        //封装orderitems
+        sql = "select * from orderitem oi,product p where oi.pid = p.pid and oi.oid = ?";
+        List<Map<String, Object>> query = qr.query(sql, new MapListHandler(), oid);
+        for (Map<String, Object> map : query) {
+            //封装product
+            Product product = new Product();
+            BeanUtils.populate(product, map);
+
+            //封闭orderitem
+            OrderItem oi = new OrderItem();
+            BeanUtils.populate(oi, map);
+            oi.setProduct(product);
+
+            //将orderitem加入到order的items中
+            order.getItems().add(oi);
+        }
+        return order;
     }
 }
