@@ -1,6 +1,5 @@
 package com.itheima.web.filter;
 
-import com.itheima.domain.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,6 +12,7 @@ public class PrivilegeFilter implements Filter {
     @Override
     public void destroy() {
     }
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         //1,强转
