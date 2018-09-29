@@ -8,7 +8,7 @@
     <script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
     <script type="text/javascript">
         function addCategory() {
-            window.location.href = "${pageContext.request.contextPath}/";
+            window.location.href = "${pageContext.request.contextPath}/adminCategory?method=addUI";
         }
     </script>
 </HEAD>
@@ -24,7 +24,7 @@
     <tr>
         <td class="ta_01" align="right">
             <button type="button" id="add" name="add" value="添加" class="button_add" onclick="addCategory()">
-                &#28155;&#21152;
+                添加分类
             </button>
 
         </td>
@@ -55,11 +55,11 @@
                         onmouseout="this.style.backgroundColor = '#F5FAFE';">
                         <td style="CURSOR: hand; HEIGHT: 22px" align="center"
                             width="18%">
-                            ${vs.count}
+                                ${vs.count}
                         </td>
                         <td style="CURSOR: hand; HEIGHT: 22px" align="center"
                             width="17%">
-                            ${c.cname}
+                                ${c.cname}
                         </td>
                         <td align="center" style="HEIGHT: 22px">
                             <a href="${ pageContext.request.contextPath }/adminCategory">
