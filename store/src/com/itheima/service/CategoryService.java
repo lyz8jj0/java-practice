@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CategoryService {
     List<Category> findAll() throws Exception;
+
+    void add(Category c) throws Exception;
 }

@@ -56,9 +56,12 @@ public class AdminCategoryServlet extends BaseServlet {
         c.setCname(cname);
 
         //3,调用service完成添加操作
-        CategoryService cs  = (CategoryService) BeanFactory.getBean("CategoryService");
+        CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
+        cs.add(c);
 
         //4,重定向查询所有分类
+        response.sendRedirect(request.getContextPath() + "/adminCategory?method=findAll");
+
         return null;
     }
 

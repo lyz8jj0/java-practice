@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CategoryDao {
     List<Category> findAll() throws Exception;
+
+    void add(Category c) throws Exception;
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @WebFilter(filterName = "EncodingFilter",urlPatterns = {"/*"})
@@ -39,7 +40,7 @@ class MyRequest extends HttpServletRequestWrapper {
     private boolean flag=true;
 
 
-    public MyRequest(HttpServletRequest request) {
+    MyRequest(HttpServletRequest request) {
         super(request);
         this.request=request;
     }
@@ -90,7 +91,6 @@ class MyRequest extends HttpServletRequestWrapper {
                 request.setCharacterEncoding("utf-8");
                 return request.getParameterMap();
             } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }else if("get".equalsIgnoreCase(method)){
@@ -102,7 +102,7 @@ class MyRequest extends HttpServletRequestWrapper {
                     for(int i=0;i<arr.length;i++){
                         //编码
                         try {
-                            arr[i]=new String(arr[i].getBytes("iso8859-1"),"utf-8");
+                            arr[i]=new String(arr[i].getBytes("iso8859-1"), StandardCharsets.UTF_8);
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
@@ -111,10 +111,8 @@ class MyRequest extends HttpServletRequestWrapper {
                 flag=false;
             }
             //需要遍历map 修改value的每一个数据的编码
-
             return map;
         }
-
         return super.getParameterMap();
     }
 

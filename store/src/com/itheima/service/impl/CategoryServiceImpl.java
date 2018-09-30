@@ -4,6 +4,7 @@ import com.itheima.dao.CategoryDao;
 import com.itheima.dao.impl.CategoryDaoImpl;
 import com.itheima.domain.Category;
 import com.itheima.service.CategoryService;
+import com.itheima.utils.BeanFactory;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
@@ -49,6 +50,18 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return list;
+    }
+
+    /**
+     * 添加分类
+     * @param c
+     * @throws Exception
+     */
+    @Override
+    public void add(Category c) throws Exception {
+        //暂时获取dao
+        CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
+        cd.add(c);
     }
 
     public static void main(String[] args) {

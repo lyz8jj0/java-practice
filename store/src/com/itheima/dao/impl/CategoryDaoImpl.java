@@ -15,4 +15,17 @@ public class CategoryDaoImpl implements CategoryDao {
         String sql = "select * from category";
         return qr.query(sql, new BeanListHandler<>(Category.class));
     }
+
+    /**
+     * 添加分类
+     *
+     * @param c
+     * @throws Exception
+     */
+    @Override
+    public void add(Category c) throws Exception {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "insert into category values (?,?) ";
+        qr.update(sql, c.getCid(), c.getCname());
+    }
 }
