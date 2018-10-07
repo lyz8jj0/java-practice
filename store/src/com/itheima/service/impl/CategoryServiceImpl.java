@@ -54,7 +54,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * 添加分类
-     * @param c
+     *
+     * @param
      * @throws Exception
      */
     @Override
@@ -62,6 +63,48 @@ public class CategoryServiceImpl implements CategoryService {
         //暂时获取dao
         CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
         cd.add(c);
+
+        //更新缓存
+        //1,创建缓存管理器
+        CacheManager cm = CacheManager.create(CategoryServiceImpl.class.getClassLoader().getResourceAsStream("ehcache.xml"));
+
+        //2,获取指定的缓存
+        Cache cache = cm.getCache("categoryCache");
+
+        //清空缓存
+        cache.remove("clist");
+    }
+
+    /**
+     * 通过cid获取一个分类对象
+     *
+     * @param cid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Category getById(String cid) throws Exception {
+        CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
+        return cd.getById(cid);
+
+    }
+
+    /**
+     * 更新分类
+     *
+     * @param c
+     * @throws Exception
+     */
+    @Override
+    public void update(Category c) throws Exception {
+        //1,调用dao更新
+        CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
+        cd.update(c);
+
+        //2,清空缓存
+        CacheManager cm = CacheManager.create(CategoryServiceImpl.class.getClassLoader().getResourceAsStream("ehcache.xml"));
+        Cache cache = cm.getCache("categoryCache");
+        cache.remove("clist");
     }
 
     public static void main(String[] args) {

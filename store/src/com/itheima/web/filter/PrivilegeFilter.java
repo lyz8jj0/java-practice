@@ -21,7 +21,7 @@ public class PrivilegeFilter implements Filter {
 
         //2,业务逻辑
         //从session中获取user 判断user是否为空 请求转发
-//        User user = (User) request.getSession().getAttribute("user");
+//        User user = (User) request.getSession().getAt tribute("user");
 //        if (user == null) {
 //            request.setAttribute("msg", "没有权限,请先登录!");
 //            request.getRequestDispatcher("/jsp/msg.jsp").forward(request, response);

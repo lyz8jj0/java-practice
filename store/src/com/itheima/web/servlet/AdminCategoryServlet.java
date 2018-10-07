@@ -65,4 +65,50 @@ public class AdminCategoryServlet extends BaseServlet {
         return null;
     }
 
+    /**
+     * 通过id获取分类信息
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public String getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1,接受cid
+        String cid = request.getParameter("cid");
+
+
+        //2,调用service完成查询操作 返回值:category
+        CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
+        Category c = cs.getById(cid);
+
+        //3,将category放入request域中,请求转发/admin/category/edit.jsp
+        request.setAttribute("bean", c);
+
+        return "/admin/category/edit.jsp";
+    }
+
+    /**
+     * 更新分类信息方法
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public String update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1,获取cid cname
+        //2,封装参数
+        Category c = new Category();
+        c.setCid(request.getParameter("cid"));
+        c.setCname(request.getParameter("cname"));
+
+        //3,调用service 完成更新操作
+        CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
+        cs.update(c);
+
+        //重定向查询所有
+        response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
+        return null;
+    }
 }
