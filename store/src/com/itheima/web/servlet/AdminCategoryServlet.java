@@ -109,10 +109,19 @@ public class AdminCategoryServlet extends BaseServlet {
 
         //重定向查询所有
 
-        response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
+        response.sendRedirect(request.getContextPath() + "/adminCategory?method=findAll");
         return null;
     }
-    public String delete(HttpServletRequest request,HttpServletResponse response)throws Exception{
+
+    /**
+     * 删除分类
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //1,获取cid
         String cid = request.getParameter("cid");
 
@@ -121,7 +130,7 @@ public class AdminCategoryServlet extends BaseServlet {
         cs.delete(cid);
 
         //3,重定向
-        response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
+        response.sendRedirect(request.getContextPath() + "/adminCategory?method=findAll");
         return null;
     }
 }

@@ -18,4 +18,6 @@ public interface ProductDao {
     void updateCid(String cid) throws Exception;
 
     List<Product> findAll() throws Exception;
+
+    void add(Product p) throws Exception;
 }
