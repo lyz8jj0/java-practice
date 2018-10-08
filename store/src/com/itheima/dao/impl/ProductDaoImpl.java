@@ -40,8 +40,8 @@ public class ProductDaoImpl implements ProductDao {
     /**
      * 通过商品id获取商品
      *
-     * @returnj
      * @throws Exception
+     * @returnj
      */
     @Override
     public Product getByPid(String pid) throws Exception {
@@ -78,5 +78,18 @@ public class ProductDaoImpl implements ProductDao {
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select count(*) from product where cid = ?";
         return ((Long) qr.query(sql, new ScalarHandler(), cid)).intValue();
+    }
+
+    /**
+     * 更新商品的cid,为删除分类的时候做准备
+     *
+     * @param cid
+     * @throws Exception
+     */
+    @Override
+    public void updateCid(String cid) throws Exception {
+        QueryRunner qr = new QueryRunner();
+        String sql = "update product set cid = null where cid = ?";
+        qr.update(DataSourceUtils.getConnection(), sql, cid);
     }
 }

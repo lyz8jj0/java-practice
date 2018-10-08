@@ -111,4 +111,16 @@ public class AdminCategoryServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
         return null;
     }
+    public String delete(HttpServletRequest request,HttpServletResponse response)throws Exception{
+        //1,获取cid
+        String cid = request.getParameter("cid");
+
+        //2,调用service完成删除
+        CategoryService cs = (CategoryService) BeanFactory.getBean("CategoryService");
+        cs.delete(cid);
+
+        //3,重定向
+        response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
+        return null;
+    }
 }
