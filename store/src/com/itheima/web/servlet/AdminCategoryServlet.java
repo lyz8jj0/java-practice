@@ -108,6 +108,7 @@ public class AdminCategoryServlet extends BaseServlet {
         cs.update(c);
 
         //重定向查询所有
+
         response.sendRedirect(request.getContextPath()+"/adminCategory?method=findAll");
         return null;
     }

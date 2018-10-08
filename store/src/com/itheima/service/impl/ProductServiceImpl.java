@@ -5,6 +5,7 @@ import com.itheima.dao.impl.ProductDaoImpl;
 import com.itheima.domain.Product;
 import com.itheima.service.ProductService;
 import com.itheima.domain.PageBean;
+import com.itheima.utils.BeanFactory;
 
 import java.util.List;
 
@@ -65,5 +66,17 @@ public class ProductServiceImpl implements ProductService {
 
 
         return new PageBean<>(list, currPage, pageSize, totalCount);
+    }
+
+    /**
+     * 查询商品列表
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Product> findAll() throws Exception {
+        ProductDao pdao = (ProductDao) BeanFactory.getBean("ProductDao");
+        return pdao.findAll();
     }
 }

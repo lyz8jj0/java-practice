@@ -92,4 +92,17 @@ public class ProductDaoImpl implements ProductDao {
         String sql = "update product set cid = null where cid = ?";
         qr.update(DataSourceUtils.getConnection(), sql, cid);
     }
+
+    /**
+     * 查询所的商品
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Product> findAll() throws Exception {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from  product";
+        return qr.query(sql, new BeanListHandler<>(Product.class));
+    }
 }
