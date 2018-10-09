@@ -128,4 +128,35 @@ public class OrderDaoImpl implements OrderDao {
         }
         return order;
     }
+
+
+    /**
+     * 修改订单
+     */
+    @Override
+    public void update(Order order) throws Exception {
+		/*
+		  `state` int(11) DEFAULT NULL,
+		  `address` varchar(30) DEFAULT NULL,
+		  `name` varchar(20) DEFAULT NULL,
+
+		  `telephone` varchar(20) DEFAULT NULL,
+		  `uid` varchar(32) DEFAULT NULL,
+		 */
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "update orders set state=?,address=?,name=?,telephone=? where oid=?";
+        qr.update(sql, order.getState(), order.getAddress(), order.getName(), order.getTelephone(), order.getOid());
+    }
+
+    @Override
+    public List<Order> findAllByState(String state) throws Exception {
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from orders where 1=1 ";
+        if (state != null && state.trim().length() > 0) {
+            sql += "and state = ? order by ordertime desc";
+            return qr.query(sql, new BeanListHandler<>(Order.class), state);
+        }
+        sql += " order by ordertime desc";
+        return qr.query(sql, new BeanListHandler<>(Order.class));
+    }
 }
