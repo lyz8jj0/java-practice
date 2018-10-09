@@ -83,31 +83,31 @@ public class OrderServlet extends BaseServlet {
         return "/jsp/order_info.jsp";
     }
 
-    public String findAllByPage(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String findAllByPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //1,获取当前页
         int currPage = Integer.parseInt(request.getParameter("currPage"));
         int pageSize = 3;
 
         //2,获取用户
         User user = (User) request.getSession().getAttribute("user");
-        if(user == null){
+        if (user == null) {
             request.setAttribute(
-                    "msg","你还没有登录,请登录!");
+                    "msg", "你还没有登录,请登录!");
             return "/jsp/msg.jsp";
         }
 
         //3,调用service分页查询 参数:currpage pageSize user 返回:pageBean
-        OrderService os = (OrderService)BeanFactory.getBean("OrderService");
-        PageBean<Order> bean = os.findAllByPage(currPage,pageSize,user);
+        OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+        PageBean<Order> bean = os.findAllByPage(currPage, pageSize, user);
 
 
         //4,将PageBean放入request域中
-        request.setAttribute("pb",bean);
+        request.setAttribute("pb", bean);
 
         return "/jsp/order_list.jsp";
     }
 
-    public String getById(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //1,获取oid
         String oid = request.getParameter("oid");
 
@@ -116,8 +116,32 @@ public class OrderServlet extends BaseServlet {
         Order order = os.getById(oid);
 
         //3,将order放入request域中
-        request.setAttribute("bean",order);
+        request.setAttribute("bean", order);
 
         return "jsp/order_info.jsp";
     }
+
+    /**
+     * 确认收货更改订单状态
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public String updateState(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //1,获取oid
+        String oid = request.getParameter("oid");
+
+        //2,调用service修改订单状态
+        OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+        Order order = os.getById(oid);
+        order.setState(3);
+        os.update(order);
+
+        //3,重定向
+        response.sendRedirect(request.getContextPath() + "/order?method=findAllByPage&currPage=1");
+        return null;
+    }
+
 }

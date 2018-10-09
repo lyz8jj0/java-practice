@@ -45,7 +45,7 @@
                                 已付款
                             </c:if>
                             <c:if test="${o.state == 2}">
-                                <a href="">确认付款</a>
+                                <a href="${pageContext.request.contextPath}/order?method=updateState&oid=${o.oid}">确认付款</a>
                             </c:if>
                             <c:if test="${o.state == 3}">
                                 已完成
