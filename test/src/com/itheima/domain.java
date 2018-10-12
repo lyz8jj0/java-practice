@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -121,12 +122,30 @@ public class domain {
         for (Object map : maps.entrySet()) {
             System.out.println(((Map.Entry) map).getKey() + " " + ((Map.Entry) map).getValue());
         }
-
-
-
-
-
     }
 
+    /**
+     * 上月第一天
+     *
+     * @return
+     */
+    public static String getPreviousMonthFirst2() {
+        String str;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar lastDate = Calendar.getInstance();
+        lastDate.set(Calendar.DATE, 1);// 设为当前月的1号
+        lastDate.add(Calendar.MONTH, -1);// 减一个月，变为下月的1号
+        str = sdf.format(lastDate.getTime());
+        str = str+" 00:00:00";
+        return str;
+    }
+
+    public static void main(String[] args) {
+        String demo = getPreviousMonthFirst2();
+        System.out.println(demo);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date()));
+
+    }
 
 }
