@@ -2,9 +2,11 @@ package com.itheima.dao;
 
 import com.itheima.domain.Customer;
 import com.itheima.utils.HibernateUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -33,17 +35,43 @@ public class CustomerDao {
      *
      * @return
      */
-    public Customer getCustomerList() {
-        //获取session
+    public List<Customer> findAll() {
+        //QBC查询
         Session session = HibernateUtils.getSession();
+        Transaction tr = session.beginTransaction();
         //创建查询的接口
-        Query query = session.createQuery("from Customer");
-        //查询所的数据select * from
-        List<Customer> list = query.list();
-        for (Customer customer : list) {
-            System.out.println(customer);
+//        Query query = session.createQuery("from Customer");
+        Criteria criteria = session.createCriteria(Customer.class);
+        //查询
+        List<Customer> list = criteria.list();
+        tr.commit();
+        session.close();
+        return list;
+    }
+
+
+    /**
+     * 带查询条件的客户列表
+     *
+     * @return
+     */
+    public List<Customer> findAll(String custName) {
+        //QBC查询
+        Session session = HibernateUtils.getSession();
+        Transaction tr = session.beginTransaction();
+        //创建查询的接口
+//        Query query = session.createQuery("from Customer");
+        Criteria criteria = session.createCriteria(Customer.class);
+        //添加查询条件
+        if (custName != null && !custName.trim().isEmpty()) {
+            //添加查询条件
+            criteria.add(Restrictions.like("cust_name", "%" + custName + "%"));
         }
 
-        return null;
+        //查询
+        List<Customer> list = criteria.list();
+        tr.commit();
+        session.close();
+        return list;
     }
 }

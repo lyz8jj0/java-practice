@@ -9,16 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "ListCustomerServlet",urlPatterns = {"/listCustomer"})
+/**
+ * 查询所有的客户
+ */
+@WebServlet(name = "ListCustomerServlet", urlPatterns = {"/listCustomer"})
 public class ListCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // 调用业务
-        Customer c = new CustomerService().getCustomerList();
+
+        //先获取请求的参数
+        request.setCharacterEncoding("UTF-8");
+        //获取客户的名称
+        String custName = request.getParameter("custName");
+
+        List<Customer> list = new CustomerService().findAll(custName);
+        //存入request
+        request.setAttribute("list", list);
+        //转发
+        request.getRequestDispatcher("/jsp/customer/list.jsp").forward(request, response);
+
     }
 
 }
