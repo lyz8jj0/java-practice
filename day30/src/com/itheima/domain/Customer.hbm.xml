@@ -27,7 +27,7 @@
         <!--配置一方
             set标签name属性:表示集合的名称
         -->
-        <set name="linkmans">
+        <set name="linkmans" cascade="save-update">
             <!--需要出现的子标签-->
             <!--外键的字段-->
             <key column="lkm_cust_id"/>
