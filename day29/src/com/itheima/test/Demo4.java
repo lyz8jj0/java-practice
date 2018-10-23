@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class Demo4 {

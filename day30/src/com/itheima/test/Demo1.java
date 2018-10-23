@@ -152,4 +152,34 @@ public class Demo1 {
 
         tr.commit();
     }
+
+    /**
+     * 测试:删除客户,客户下有2个联系人
+     */
+    @Test
+    public void run6() {
+        Session session = HibernateUtils.getSession();
+        Transaction tr = session.beginTransaction();
+        //先查询1号客户
+        Customer c1 = session.get(Customer.class,1L);
+        session.delete(c1);
+
+        tr.commit();
+    }
+
+    /**
+     * 解除关系:从集合中删除联系人
+     */
+    @Test
+    public void run10() {
+        Session session = HibernateUtils.getSession();
+        Transaction tr = session.beginTransaction();
+        //先获取到客户
+        Customer c1 = session.get(Customer.class, 1L);
+        Linkman l1 = session.get(Linkman.class, 1L);
+        //解除
+        c1.getLinkmans().remove(l1);
+
+        tr.commit();
+    }
 }
