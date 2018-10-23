@@ -38,4 +38,9 @@ public class HibernateUtils {
     public static Session getCurrentSession() {
         return FACTORY.getCurrentSession();
     }
+
+    public static void main(String[] args) {
+        //调用获取session方法
+        getSession();
+    }
 }

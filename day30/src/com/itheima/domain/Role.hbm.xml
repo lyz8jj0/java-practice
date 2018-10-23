@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.itheima.domain.Role" table="sys_role">
+        <!--配置id
+           见到name属性,JavaBean的属性
+           见到column属性,是表结构的字段
+        -->
+        <id name="rid" column="rid">
+            <generator class="native"/>
+        </id>
+
+        <!--配置其他的属性-->
+        <property name="rname" column="rname"/>
+
+        <set name="users" table="sys_user_role">
+            <key column="rid"/>
+            <many-to-many class="com.itheima.domain.User" column="uid"/>
+        </set>
+    </class>
+</hibernate-mapping>
