@@ -16,7 +16,8 @@
         <!--配置其他的属性-->
         <property name="rname" column="rname"/>
 
-        <set name="users" table="sys_user_role">
+        <!--多对多必须要有一方放弃外键的维护-->
+        <set name="users" table="sys_user_role" inverse="true">
             <key column="rid"/>
             <many-to-many class="com.itheima.domain.User" column="uid"/>
         </set>

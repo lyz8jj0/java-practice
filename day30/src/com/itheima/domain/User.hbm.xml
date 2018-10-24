@@ -21,7 +21,7 @@
             name    集合的名称
             table   中间表的名称
         -->
-        <set name="roles" table="sys_user_role">
+        <set name="roles" table="sys_user_role" cascade="save-update">
             <!--当前对象的中间表的外键的名称-->
             <key column="uid"/>
             <!--
