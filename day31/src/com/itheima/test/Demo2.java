@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -123,10 +124,47 @@ public class Demo2 {
         //query.setString("gender","女");
 
         //通用的方法,就不用再判断具体类型了
-        query.setParameter(0,3L);
+        query.setParameter(0, 3L);
 
         List<Linkman> list = query.list();
 
+        for (Linkman linkman : list) {
+            System.out.println(linkman);
+        }
+        tr.commit();
+    }
+
+    /**
+     * 指定字段查询
+     */
+    @Test
+    public void run7() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //创建HQL的查询接口
+        Query query = session.createQuery("select lkm_name,lkm_gender from Linkman");
+
+        List<Object[]> list = query.list();
+        for (Object[] objects : list) {
+            System.out.println(Arrays.toString(objects));
+        }
+        tr.commit();
+    }
+
+
+    /**
+     * 投影查询:只查询几个字段,不是所有字段
+     * 第一步:需要在JavaBean类提供对应的构造方法
+     * 第二步:HQL语句发生变化
+     */
+    @Test
+    public void run8() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //创建HQL的查询接口
+        Query query = session.createQuery("select new Linkman(lkm_name,lkm_gender) from Linkman");
+
+        List<Linkman> list = query.list();
         for (Linkman linkman : list) {
             System.out.println(linkman);
         }

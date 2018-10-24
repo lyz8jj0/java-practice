@@ -113,4 +113,13 @@ public class Linkman {
                 ", lkm_memo='" + lkm_memo + '\'' +
                 '}';
     }
+
+    public Linkman(String lkm_name, String lkm_gender) {
+        this.lkm_name = lkm_name;
+        this.lkm_gender = lkm_gender;
+    }
+
+    //必须有一个空的构造方法
+    public Linkman() {
+    }
 }
