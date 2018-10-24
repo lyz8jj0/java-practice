@@ -170,4 +170,51 @@ public class Demo2 {
         }
         tr.commit();
     }
+
+    /**
+     * 聚合函数:count() sum() avg() max() min()
+     */
+    @Test
+    public void run9() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //查询有所有的联系人的数量
+        List<Number> list = session.createQuery("select count(*) from Linkman").list();
+        //通过下标值取值
+        Long count = list.get(0).longValue();
+        System.out.println("数量:" + count);
+        tr.commit();
+    }
+
+    /**
+     * 聚合函数:count()
+     */
+    @Test
+    public void run10() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //查询有所有的联系人的数量
+        List<Number> list = session.createQuery("select count(l) from Linkman l").list();
+        //通过下标值取值
+        Long count = list.get(0).longValue();
+        System.out.println("数量:" + count);
+
+        tr.commit();
+    }
+
+    /**
+     * 聚合函数:count() sum() avg() max() min()
+     */
+    @Test
+    public void run11() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //查询有所有的联系人的数量
+        List<Number> list = session.createQuery("select sum(lkm_id) from Linkman").list();
+        //通过下标值取值
+        Long count = list.get(0).longValue();
+        System.out.println("数量:" + count);
+
+        tr.commit();
+    }
 }
