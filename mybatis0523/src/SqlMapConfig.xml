@@ -21,6 +21,13 @@
 
     <mappers>
         <!--<mapper resource="User.xml"/>-->
-        <mapper resource="cn/itheima/pojo/User.xml"></mapper>
+        <mapper resource="cn/itheima/pojo/User.xml"/>
+        <!--
+        使用class属性引入接口的全路径名称:
+        使用规则:
+            1,接口名称和映射文件名除扩展名外要完全相同
+            2,接口和映射文件要放在同一目录下
+        -->
+        <mapper class="cn.itheima.mapper.UserMapper"/>
     </mappers>
 </configuration>
