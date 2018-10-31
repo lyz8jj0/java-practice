@@ -6,7 +6,9 @@ import com.itheima.utils.HibernateUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 
@@ -150,7 +152,6 @@ public class Demo3 {
     }
 
 
-
     /**
      * 判断值是否为空
      */
@@ -165,6 +166,67 @@ public class Demo3 {
         criteria.add(Restrictions.isNull("lkm_email"));
 
         List<Linkman> list = criteria.list();
+        for (Linkman linkman : list) {
+            System.out.println(linkman);
+        }
+        tr.commit();
+    }
+
+    /**
+     * 聚合函数的查询
+     */
+    @Test
+    public void run8() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //创建QBC查询接口
+        Criteria criteria = session.createCriteria(Linkman.class);
+        //设置聚合函数的方式
+        List<Number> list = criteria.setProjection(Projections.count("lkm_id")).list();
+        Long count = list.get(0).longValue();
+        System.out.println(count);
+        tr.commit();
+    }
+
+    /**
+     * 强调问题:select count(*) from 表,又想查select
+     */
+    @Test
+    public void run9() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //创建QBC查询接口
+        Criteria criteria = session.createCriteria(Linkman.class);
+        //设置聚合函数的方式
+        criteria.setProjection(Projections.count("lkm_id"));
+        List<Number> list = criteria.list();
+        Long count = list.get(0).longValue();
+        System.out.println(count);
+
+        //继续查询所有的联系人
+        criteria.setProjection(null);
+        List<Linkman> mans = criteria.list();
+        for (Linkman linkman : mans) {
+            System.out.println(linkman);
+        }
+
+        tr.commit();
+    }
+
+
+    /**
+     * 演示离线条件对象
+     */
+    @Test
+    public void run10() {
+        Session session = HibernateUtils.getCurrentSession();
+        Transaction tr = session.beginTransaction();
+        //创建离线条件查询的对象
+        DetachedCriteria criteria = DetachedCriteria.forClass(Linkman.class);
+        //添加查询条件
+        criteria.add(Restrictions.eq("lkm_gender", "女"));
+        //查询了
+        List<Linkman> list = criteria.getExecutableCriteria(session).list();
         for (Linkman linkman : list) {
             System.out.println(linkman);
         }
