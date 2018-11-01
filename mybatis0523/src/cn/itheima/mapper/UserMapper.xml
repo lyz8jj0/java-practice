@@ -17,7 +17,7 @@
     resultType:返回结果集类型
     #{}占位符:起到占位作用,如果传入的基本类型(String,long,double,boolean,float等),那么#{}中的变量名称可以随意写
     -->
-    <select id="findUserById" parameterType="int" resultType="cn.itheima.pojo.User">
+    <select id="findUserById" parameterType="int" resultType="user">
         select * from user where id = #{id}
     </select>
 
@@ -27,7 +27,7 @@
         ${}拼接符:字符串原样拼接,如果传入的参数是类型如果传入的基本类型(String,long,double,boolean,float等),那么${}中的变量必须为value
         注意:拼接符有sql注入的风险,所以慎重使用
     -->
-    <select id="findUserByUserName" parameterType="String" resultType="cn.itheima.pojo.User">
+    <select id="findUserByUserName" parameterType="string" resultType="cn.itheima.pojo.User">
         select * from user where username like '%${value}%'
     </select>
 
@@ -49,5 +49,14 @@
         insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
     </insert>
 
+    
+    <select id="findUserbyVo" parameterType="cn.itheima.pojo.QueryVo" resultType="user">
+        select * from user where username like '%${user.username}%' and sex = #{user.sex}
+    </select>
+
+    <!--只有返回结果为一行一列的时候,那么返回值类型才可以指定基本类型-->
+    <select id="findUserCount" resultType="int">
+        select count(*) from user
+    </select>
 
 </mapper>

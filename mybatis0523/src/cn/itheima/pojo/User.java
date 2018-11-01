@@ -1,8 +1,10 @@
 package cn.itheima.pojo;
 
-import java.io.Serializable;
+import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 
+@Alias("user")
 public class User {
     private int id;
     private String username;// 用户姓名
