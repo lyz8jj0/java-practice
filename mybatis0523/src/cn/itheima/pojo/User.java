@@ -1,8 +1,10 @@
 package cn.itheima.pojo;
 
 import org.apache.ibatis.type.Alias;
+import org.apache.logging.log4j.core.config.Order;
 
 import java.util.Date;
+import java.util.List;
 
 @Alias("user")
 public class User {
@@ -11,6 +13,8 @@ public class User {
     private String sex;// 性别
     private Date birthday;// 生日
     private String address;// 地址
+
+    private List<Order> orderList;
 
     public int getId() {
         return id;
@@ -52,11 +56,11 @@ public class User {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", sex=" + sex
-                + ", birthday=" + birthday + ", address=" + address + "]";
+    public List<Order> getOrderList() {
+        return orderList;
     }
 
-
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 }

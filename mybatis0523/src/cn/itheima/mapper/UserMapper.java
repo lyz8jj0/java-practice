@@ -1,7 +1,9 @@
 package cn.itheima.mapper;
 
+import cn.itheima.pojo.CustomOrders;
 import cn.itheima.pojo.QueryVo;
 import cn.itheima.pojo.User;
+import org.apache.logging.log4j.core.config.Order;
 
 import java.util.List;
 
@@ -17,5 +19,15 @@ public interface UserMapper {
     public List<User> findUserbyVo(QueryVo vo);
 
     public Integer findUserCount();
+
+    public List<User> findUserByUserNameAndSex(User user);
+
+    public List<User> findUserByIds(QueryVo vo);
+
+    public List<CustomOrders> findOrdersAndUser1();
+
+    public List<Order> findOrdersAndUsers2();
+
+    public List<User> findUserAndOrders();
 
 }
