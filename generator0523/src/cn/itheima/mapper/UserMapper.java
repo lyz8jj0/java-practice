@@ -2,9 +2,8 @@ package cn.itheima.mapper;
 
 import cn.itheima.pojo.User;
 import cn.itheima.pojo.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int countByExample(UserExample example);
