@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                     http://www.springframework.org/schema/aop
+                     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                     http://www.springframework.org/schema/tx
+                     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+                     http://www.springframework.org/schema/mvc
+                     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--配置@Controller注解扫描-->
+    <context:component-scan base-package="cn.itheima.controller"/>
+
+    <!--如果没有显示的配置处理器映射器和处理器适配器,那么springMvc会去默认的dispatcherServlet.properties查找,
+    对应的处理器映射器和处理器适配器去使用,这样第个请求都要扫描一次他的默认配置文件,效率非常低,会降低访问速度,所以要显示的配置
+    处理器映射器和处理器适配器-->
+
+    <!--注解形式的处理器映射器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>-->
+
+    <!--注解形式的处理器适配器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+
+    <!--配置最新版的注解的处理器映射器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+
+    <!--配置最新版的注解的处理器适配器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+
+    <!--
+    注解驱动:
+        作用:替我们自动配置最新版的处理器映射器和处理器适配器
+    -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--配置视图解析器
+        作用:在controller中指页面路径的时候就不用写页面的完整路径名称了,可以直接写页面去掉扩展名的名称
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--真正的页面路径 = 前缀 + 去掉后缀名的页面名称 + 后缀-->
+        <!--前缀-->
+        <property name="prefix" value="/jsp/"/>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
+
